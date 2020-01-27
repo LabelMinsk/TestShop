@@ -1,0 +1,29 @@
+<h1>Cheap Trip</h1>
+
+{{#if tours.length}}
+{{#each tours}}
+<div class="row">
+    <div class="col s6 offset-s3">
+        <div class="card">
+            <div class="card-image">
+                <img src="{{img}}" alt='{{title}}'>
+            </div>
+            <div class="card-content">
+                <span class="card-title">{{title}}</span>
+                <p class='price'>{{price}}</p>
+            </div>
+            <div class="card-action actions">
+                <a href="/tours/{{id}}" target="_blank">Open tour</a>
+                <a href="/tours/{{id}}/edit?allow=true" target="_blank">Edit tour</a>
+                <form action="/card/add" method='POST'>
+                    <input type="hidden" name="id" value="{{id}}">
+                    <button type="submit" class="btn btn-primary">Card</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{else}}
+
+{{/if}}

@@ -1,0 +1,37 @@
+nav {
+    background-color: #7e6cfd;
+}
+
+.btn {
+    background-color: #7e6cfd;
+}
+
+.price {
+    font-size: 1.5rem;
+}
+
+.tour {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tour h1 {
+    margin-bottom: 2rem;
+}
+
+.tour img {
+    max-width: 600px;
+    height: auto;
+}
+
+.tour .price.big {
+    font-size: 2rem;
+}
+
+.card-action.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+}

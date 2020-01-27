@@ -1,0 +1,30 @@
+<nav>
+    <div class="nav-wrapper container">
+        <a href="/" class="brand-logo">TripLogo</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+            {{#if isMain}}
+            <li class='active'><a href="/">Main</a></li>
+            {{else}}
+            <li><a href="/">Main</a></li>
+            {{/if}}
+
+            {{#if isTours}}
+            <li class='active'><a href="/tours">Tours</a></li>
+            {{else}}
+            <li><a href="/tours">Tours</a></li>
+            {{/if}}
+
+            {{#if isAdd}}
+            <li class='active'><a href="/add">add tour</a></li>
+            {{else}}
+            <li><a href="/add">Add tour</a></li>
+            {{/if}}
+
+            {{#if isCard}}
+            <li class='active'><a href="/card">Card</a></li>
+            {{else}}
+            <li><a href="/card">Card</a></li>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
