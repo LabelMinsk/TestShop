@@ -10,12 +10,21 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async(req, res) => {
-  const tour = new Tour(
-      req.body.title, 
-      req.body.price, 
-      req.body.img);
-  await tour.save();
-  res.redirect('/tours');
+  const tour = new Tour({
+     title: req.body.title, 
+     price: req.body.price, 
+     img: req.body.img,
+     userId: req.user
+    }
+     );
+
+  try{
+    await tour.save();
+    res.redirect('/tours');
+  }catch(e){
+    console.log(err);    
+  }
+  
 });
 
 module.exports = router;

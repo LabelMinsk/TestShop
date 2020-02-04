@@ -1,74 +1,28 @@
-const fs = require('fs');
-const path = require('path');
-const uuid = require('uuid/v4');
+const {Schema, model} = require('mongoose');
 
-class Tour {
-    constructor(title, price, img) {
-        this.title = title,
-            this.price = price,
-            this.img = img,
-            this.id = uuid()
+const tour = new Schema({
+    title:{ 
+        type:String,
+        required:true
+    },
+    price:{
+        type:Number,
+        required:true
+    },
+    img: String,
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: 'User'
     }
-    toJSON() {
-        return {
-            title: this.title,
-            price: this.price,
-            img: this.img,
-            id: this.id
-        };
-    }
-    static async update(tour){
-        const tours = await Tour.getAll();
-        const idx = tours.findIndex(x => x.id === tour.id);
-        tours[idx] = tour;
+});
 
-        return new Promise((resolve, reject) => {
-            fs.writeFile(
-                path.join(__dirname, '..', 'data', 'tours.json'), JSON.stringify(tours),
-                (err) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve();
-                    }
-                });
-        });
-    }
+tour.method('toClient', function(){
+    const tours = this.toObject();
+    tours.id = tours._id;
+    delete tours._id;
 
-    async save() {
-        const tours = await Tour.getAll();
-        tours.push(this.toJSON());
+    return tours;
+});
 
-        return new Promise((resolve, reject) => {
-            fs.writeFile(
-                path.join(__dirname, '..', 'data', 'tours.json'), JSON.stringify(tours),
-                (err) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve();
-                    }
-                });
-        });
-    }
-    static getAll() {
-        return new Promise((resolve, reject) => {
-            fs.readFile(
-                path.join(__dirname, '..', 'data', 'tours.json'), 'utf-8',
-                (err, content) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        resolve(JSON.parse(content));
-                    }
-                });
-        });
-    }
-    static async getById(id) {
-        const tours = await Tour.getAll();
-        return tours.find(c => c.id === id);
-    }
 
-}
-
-module.exports = Tour;
+module.exports = model('Tour', tour);

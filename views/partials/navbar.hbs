@@ -14,17 +14,34 @@
             <li><a href="/tours">Tours</a></li>
             {{/if}}
 
-            {{#if isAdd}}
-            <li class='active'><a href="/add">add tour</a></li>
-            {{else}}
-            <li><a href="/add">Add tour</a></li>
+            {{#if isAuth}}
+                 {{#if isAdd}}
+                    <li class='active'><a href="/add">add tour</a></li>
+                {{else}}
+                    <li><a href="/add">Add tour</a></li>
+                {{/if}}
+
+                {{#if isCard}}
+                    <li class='active'><a href="/card">Card</a></li>
+                {{else}}
+                    <li><a href="/card">Card</a></li>
+                {{/if}}
+
+                {{#if isOrder}}
+                    <li class='active'><a href="/orders">Orders</a></li>
+                {{else}}
+                    <li><a href="/orders">Orders</a></li>
             {{/if}}
 
-            {{#if isCard}}
-            <li class='active'><a href="/card">Card</a></li>
-            {{else}}
-            <li><a href="/card">Card</a></li>
+                <li><a href="/auth/logout">LogOut</a></li>
+            {{else}}   
+                {{#if isLogin}}
+                    <li class='active'><a href="/auth/login#login">LogIn</a></li>
+                {{else}}
+                     <li><a href="/auth/login#login">LogIn</a></li>
+                {{/if}}
             {{/if}}
+
         </ul>
     </div>
 </nav>
