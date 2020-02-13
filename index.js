@@ -11,7 +11,7 @@ const routerAdd = require('./router/add');
 const routerCard = require('./router/card');
 const routerTours = require('./router/tours');
 const routerOrders = require('./router/orders');
-const routerAuth =require('./router/auth');
+const routerAuth = require('./router/auth');
 const varMiddleware = require('./middleware/variables');
 const userMiddleware = require('./middleware/user');
 const keys = require('./keys');
@@ -26,8 +26,8 @@ const hbs = expHBS.create({
 });
 
 const store = new MongoStore({
-  collection:'sessions',
-  uri:keys.connection_DB
+  collection: 'sessions',
+  uri: keys.connection_DB
 });
 
 app.engine('hbs', hbs.engine);
@@ -35,10 +35,12 @@ app.set('view engine', 'hbs');
 app.set('views', 'views');
 
 
-app.use(express.static(path.join(__dirname,'public')));
-app.use(express.urlencoded({extended:true}));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({
+  extended: true
+}));
 app.use(session({
-  secret:keys.SESSION_SECRET,
+  secret: keys.SESSION_SECRET,
   resave: false,
   saveUninitialized: false,
   store //store:store
@@ -48,30 +50,30 @@ app.use(flash());
 app.use(varMiddleware);
 app.use(userMiddleware);
 
-app.use('/',routerIndex);
-app.use('/add',routerAdd);
-app.use('/tours',routerTours);
-app.use('/card',routerCard);
-app.use('/orders',routerOrders);
-app.use('/auth',routerAuth);
+app.use('/', routerIndex);
+app.use('/add', routerAdd);
+app.use('/tours', routerTours);
+app.use('/card', routerCard);
+app.use('/orders', routerOrders);
+app.use('/auth', routerAuth);
 
 
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT || 8001;
 
-async function start(){
-  try{
-    
-    await mongoose.connect(keys.connection_DB,{
-      useNewUrlParser:true,
+async function start() {
+  try {
+
+    await mongoose.connect(keys.connection_DB, {
+      useNewUrlParser: true,
       useUnifiedTopology: true,
-      useFindAndModify:false
+      useFindAndModify: false
     });
 
     app.listen(PORT, () => {
       console.log(`Server is running on port ${PORT}`);
     });
 
-  } catch(e){ 
+  } catch (e) {
     console.log(e);
   }
 }
