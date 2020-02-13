@@ -7,7 +7,7 @@
   - Express
   - Express-session
   - Mongoose
-  - Uuid
+  - SendGrid
   - Handlebars
   - express-handlebars
   - Nodemon
