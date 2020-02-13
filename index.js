@@ -22,7 +22,8 @@ const app = express();
 
 const hbs = expHBS.create({
   defaultLayout: 'main',
-  extname: 'hbs'
+  extname: 'hbs',
+  helpers: require('./utils/hbs-helpers')
 });
 
 const store = new MongoStore({
@@ -58,7 +59,7 @@ app.use('/orders', routerOrders);
 app.use('/auth', routerAuth);
 
 
-const PORT = process.env.PORT || 8001;
+const PORT = process.env.PORT || 8000;
 
 async function start() {
   try {
