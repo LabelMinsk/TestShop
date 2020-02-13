@@ -1,15 +1,16 @@
 const { Router } = require('express');
 const Tour = require('../models/tours');
 const router = Router();
+const authMiddleware = require('../middleware/auth');
 
-router.get('/', (req, res) => {
+router.get('/',authMiddleware, (req, res) => {
   res.render('add', {
     title: 'Add tour',
     isAdd: true
   });
 });
 
-router.post('/', async(req, res) => {
+router.post('/',authMiddleware, async(req, res) => {
   const tour = new Tour({
      title: req.body.title, 
      price: req.body.price, 

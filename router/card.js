@@ -3,6 +3,7 @@ const {
 } = require('express');
 const Tours = require('../models/tours');
 const router = Router();
+const authMiddleware = require('../middleware/auth');
 
 function mapCartItems(cart){
     return cart.items.map(c=>({
@@ -18,13 +19,13 @@ function computePrice(tourse){
     },0);
 }
 
-router.post('/add', async (req, res) => {
+router.post('/add',authMiddleware, async (req, res) => {
     const tour = await Tours.findById(req.body.id);
     await req.user.addToCart(tour);
     res.redirect('/card');
 });
 
-router.delete("/remove/:id", async (req,res)=>{
+router.delete("/remove/:id",authMiddleware, async (req,res)=>{
     await req.user.removeFromCart(req.params.id);
     const user = await req.user.populate('cart.items.toursId').execPopulate();
     const tours = mapCartItems(user.cart);
@@ -35,7 +36,7 @@ router.delete("/remove/:id", async (req,res)=>{
     res.status(200).json(cart);
 });
 
-router.get('/', async (req, res) => {
+router.get('/',authMiddleware, async (req, res) => {
     const user = await req.user
     .populate('cart.items.toursId')
     .execPopulate();

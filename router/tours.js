@@ -4,6 +4,8 @@ const {
 const Tour = require('../models/tours');
 const router = Router();
 
+const authMiddleware = require('../middleware/auth');
+
 
 router.get('/', async (req, res) => {
  /*   const tours = await Tour.find()
@@ -20,7 +22,7 @@ router.get('/', async (req, res) => {
     });
 });
 
-router.get('/:id/edit', async (req, res) => {
+router.get('/:id/edit',authMiddleware, async (req, res) => {
     if (!req.query.allow) {
         return res.redirect('/');
     }
@@ -32,7 +34,7 @@ router.get('/:id/edit', async (req, res) => {
     });
 });
 
-router.post('/edit', async (req, res) => {
+router.post('/edit',authMiddleware, async (req, res) => {
     const {
         id
     } = req.body;
@@ -41,7 +43,7 @@ router.post('/edit', async (req, res) => {
     res.redirect('/tours');
 });
 
-router.post('/remove', async (req, res) => {
+router.post('/remove',authMiddleware, async (req, res) => {
     try {
         await Tour.deleteOne({
             _id: req.body.id

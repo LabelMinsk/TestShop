@@ -19,10 +19,12 @@
     </div>
     <input type="hidden" name="id" value ="{{tour.id}}"> 
     
+    <input type="hidden" name="_csrf" value="{{csrf}}">
     <button type="submit" class='btn'>Edit tour</button>
 </form>
 
 <form action="/tours/remove" method="POST">
     <input type="hidden" name="id" value="{{tour.id}}">
+    <input type="hidden" name="_csrf" value="{{csrf}}">
     <button type="submit" class="btn red">Delete tour</button>
 </form>

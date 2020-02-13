@@ -4,7 +4,9 @@ const {
 const Order = require('../models/order');
 const router = Router();
 
-router.get('/', async (req, res) => {
+const authMiddleware = require('../middleware/auth');
+
+router.get('/',authMiddleware, async (req, res) => {
 try{
     const orders =  await Order.find({
         'user.userId':req.user._id
@@ -29,7 +31,7 @@ try{
     
 });
 
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware,async (req, res) => {
     try {
         const user = await req.user
             .populate('cart.items.toursId')
