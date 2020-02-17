@@ -11,6 +11,7 @@
   - Handlebars
   - express-handlebars
   - Nodemon
+  - Express-validator
 ### Maybe something else
 
 > P.s.  ["I`m here"](https://www.linkedin.com/in/mikhailkarnou)
