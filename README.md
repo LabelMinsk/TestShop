@@ -3,12 +3,10 @@
 
 #### This app is developed on:
   - NodeJs
-  - Handlebars
   - Express
   - Express-session
   - Mongoose
   - SendGrid
-  - Handlebars
   - express-handlebars
   - Nodemon
   - Express-validator
