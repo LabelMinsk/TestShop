@@ -2,6 +2,8 @@ const {
     Router
 } = require('express');
 const Tour = require('../models/tours');
+const {toursValidators} = require('../utils/validators');
+const {validationResult} = require('express-validator');
 const router = Router();
 const authMiddleware = require('../middleware/auth');
 
@@ -55,7 +57,15 @@ router.get('/:id/edit',authMiddleware, async (req, res) => {
     
 });
 
-router.post('/edit',authMiddleware, async (req, res) => {
+router.post('/edit',authMiddleware, toursValidators, async (req, res) => {
+    const errors = validationResult(req);
+    const {id} = req.body;
+
+  if(!errors.isEmpty()){
+    return res.status(422)
+    .redirect(`/tours/${id}/edit?allow=true`);
+  }
+    
     try{
         const {
             id

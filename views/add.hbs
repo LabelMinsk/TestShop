@@ -1,16 +1,20 @@
-<form action="/add" method='POST'>
+{{#if error}}
+<p class="alert">{{error}}</p>
+{{/if}}
+
+<form action="/add" method='POST' novalidate>
     <div class="input-field">
-        <input placeholder="Enter title" name='title' id="title" type="text" class="validate" required>
+        <input placeholder="Enter title" name='title' id="title" type="text" class="validate" value='{{data.title}}' required>
         <label for="title">Title tour</label>
         <span class="helper-text" data-error="Enter title"></span>
     </div>
     <div class="input-field">
-        <input placeholder="Enter price" name='price' id="price" type="number" class="validate" required min='1'>
+        <input placeholder="Enter price" name='price' id="price" type="number" class="validate" value='{{data.price}}' required min='1'>
         <label for="price">Price</label>
         <span class="helper-text" data-error="Enter price"></span>
     </div>
     <div class="input-field">
-        <input placeholder="Enter URL" name='img' id="img" type="text" class="validate" required>
+        <input placeholder="Enter URL" name='img' id="img" type="text" class="validate" value='{{data.img}}' required>
         <label for="img">URL Image</label>
         <span class="helper-text" data-error="Enter URL"></span>
     </div>
